@@ -1,0 +1,126 @@
+﻿
+@model List<ProjetoCoffeeShoopSaoPaulo.Models.ItemCardapio.ItemCardapioModel>
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{ ViewBag.Title = "Cadastrar Cardapio"; }
+
+@using ProjetoCoffeeShoopSaoPaulo.Utils;
+
+<h2 class="text-center">Itens do Cardápio</h2>
+
+@if (TempData["Mensagem"] != null)
+{
+    <div class="alert alert-secondary text-center" role="alert">
+        @TempData["Mensagem"]
+    </div>
+}
+
+@{if (TempData["MensagemErro"] == null)
+    {
+        <p>
+            <a class="btn btn-primary" href="@Url.Action("Cadastrar", "ItemCardapio")">Adicionar +</a>
+        </p>
+
+        <table class="table">
+            <thead class="table-danger">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Foto</th>
+                    <th scope="col">Data</th>
+                    <th rowspan="3"></th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in @Model)
+                {
+
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Nome</td>
+                    <td>@item.NomeCategoria</td>
+                    <td>@item.Descricao</td>
+                    <td><img alt="@item.Nome - @item.Descricao" style="height: 40px; width: 40px; border-radius:50px; cursor:pointer;" src="@item.Foto" onclick="abrirModal('@item.Foto', '@item.Nome')" /> </td>
+                    <td>@item.DataCadastro.ToString().Substring(0, 11)</td>
+                    <td>
+                        <a class="btn btn-primary" href="@Url.Action("Editar", "ItemCardapio", new { id = item.Id })">Editar</a>
+                        <a class="btn btn-danger" href="@Url.Action("Delete", "ItemCardapio", new { id = item.Id })">Remover</a>
+
+                    </td>
+                </tr>
+
+                }
+
+
+
+                @*<tr>
+                        <td>001</td>
+                        <td>Coxinha de Frango</td>
+                        <td>Salgados</td>
+                        <td>Descrição</td>
+                        <td><img alt="Coxinha de Frango" style="height: 40px; width: 40px; border-radius:50px" src="~/img/coxinha de frango.jpg" /> </td>
+                        <td>@data.Substring(0, 11)</td>
+                        <td>
+
+                            <a href="/Index/CadastrarCardapio" class="btn">Editar</a>
+
+                            <a href="/CadastrarCardapio/Excluir/001" class="btn">Excluir</a>
+
+                        </td>
+                    </tr>*@
+
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-danger text-center" role="alert">
+            @TempData["MensagemErro"]
+        </div>
+    }
+
+}
+
+<div class="modal" tabindex="-1" role="dialog" id="id_modal_item_cardapio">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title text-success" id="id_modal_titulo_item_cardapio"></h5>
+                <button type="button" class="close" onclick="fecharModal();">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="id_modal_img_item_cardapio" src="" style="max-width: 450px;  max-height:450px;" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    const modalItemCardapio = document.getElementById("id_modal_item_cardapio");
+    const imgModal = document.getElementById("id_modal_img_item_cardapio");
+    const tituloModal = document.getElementById("id_modal_titulo_item_cardapio");
+
+    const abrirModal = (foto, nome) => {
+
+        modalItemCardapio.style.display = "block"
+        imgModal.src = foto;
+        tituloModal.innerHTML = nome;
+    }
+
+    const fecharModal = () => {
+        modalItemCardapio.style.display = "none"
+        imgModal.src = "";
+        tituloModal.innerHTML = "";
+    }
+
+</script>

@@ -1,0 +1,65 @@
+﻿@using ProjetoCoffeeShoopSaoPaulo.Models.Categoria
+@{
+    ViewData["Title"] = "Cadastrar";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{
+
+    List<CategoriaModel> lstCategoria = (List<CategoriaModel>)TempData["lstCategoria"];
+}
+
+<h2 class="text-center">Cadastrar</h2>
+
+<h4 class="text-center text-primary">Item do Cardápio</h4>
+<hr />
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <form method="post" enctype="multipart/form-data" asp-controller="ItemCardapio" asp-action="Cadastrar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Nome" class="control-label" style="font-weight:bold;">Nome</label>
+                <input name="Nome" class="form-control" />
+                @Html.ValidationMessage("Nome", new { @class = "text-danger" })
+            </div>
+            <div class="form-group mb-2">
+                <label asp-for="Descricao" class="control-label" style="font-weight:bold;">Descrição</label>
+                <input name="descricao" class="form-control" />
+                @Html.ValidationMessage("Descricao", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="idCategoria" class="control-label" style="font-weight:bold;">Seleciona uma Categoria</label>
+
+                <select name="idCategoria" class="form-control">
+                    @foreach (var c in lstCategoria)
+                    {
+                        <option value="@c.IdCategoria">@c.Nome</option>
+
+                    }
+                </select>
+                @Html.ValidationMessage("idCategoria", new { @class = "text-danger" })
+            </div>
+
+            <br />
+            <div class="form-group mb-2">
+                <label asp-for="Foto" class="control-label" style="font-weight:bold;">Foto</label>
+
+                <input type="file" name="Foto" />
+
+                @Html.ValidationMessage("Foto", new { @class = "text-danger" })
+            </div>
+
+
+            <hr />
+            <div class="form-group float-end">
+
+                <div class="d-grid gap-2">
+                    <input type="submit" value="Cadastrar" class="btn btn-primary btn-block" />
+                    <a href="@Url.Action("Index", "ItemCardapio")" class="btn btn-outline-warning btn-block">Voltar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+﻿@model IEnumerable<ProjetoCoffeeShoopSaoPaulo.Models.Categoria.CategoriaModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 class="text-center">Categorias</h2>
+@if (TempData["MensagemErro"] == null)
+{
+    @if (TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-secondary text-center" role="alert">
+            @TempData["Mensagem"]
+        </div>
+    }
+    <p>
+        <a class="btn btn-primary" href="@Url.Action("Cadastrar", "Categoria")">Adicionar +</a>
+    </p>
+    <table class="table">
+        <thead class="table-danger">
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Foto)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.DataCadastro)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    <td><img alt="@item.Nome - @item.Descricao" style="height: 40px; width: 40px; border-radius:50px; cursor:pointer;" src="@item.Foto" onclick="abrirModal('@item.Foto', '@item.Nome')" /> </td>
+                    <td>
+                        @item.DataCadastro.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="@Url.Action("Editar", "Categoria", new { IdCategoria = item.IdCategoria })">Editar</a>
+                        <a class="btn btn-danger" href="@Url.Action("Delete", "Categoria", new { IdCategoria = item.IdCategoria })">Remover</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <div class="alert alert-danger text-center" role="alert">
+        @TempData["MensagemErro"]
+    </div>
+}
+
+<div class="modal" tabindex="-1" role="dialog" id="id_modal_item_cardapio">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title text-success" id="id_modal_titulo_item_cardapio"></h5>
+                <button type="button" class="close" onclick="fecharModal();">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="id_modal_img_item_cardapio" src="" style="max-width: 450px;  max-height:450px;" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    const modalItemCardapio = document.getElementById("id_modal_item_cardapio");
+    const imgModal = document.getElementById("id_modal_img_item_cardapio");
+    const tituloModal = document.getElementById("id_modal_titulo_item_cardapio");
+
+    const abrirModal = (foto, nome) => {
+
+        modalItemCardapio.style.display = "block"
+        imgModal.src = foto;
+        tituloModal.innerHTML = nome;
+    }
+
+    const fecharModal = () => {
+        modalItemCardapio.style.display = "none"
+        imgModal.src = "";
+        tituloModal.innerHTML = "";
+    }
+
+</script>

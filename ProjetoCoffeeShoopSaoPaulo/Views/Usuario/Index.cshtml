@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProjetoCoffeeShoopSaoPaulo.Models.Usuario.Usuario>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 class="text-center">Usuários</h2>
+
+@if (TempData["Mensagem"] != null)
+{
+    <div class="alert alert-secondary text-center" role="alert">
+        @TempData["Mensagem"]
+    </div>
+}
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Cadastrar", "Usuario")">Adicionar +</a>
+</p>
+<table class="table">
+    <thead class="table-danger">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.DataCriacao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @item.Email
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCriacao)
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("Editar", "Usuario", new { id = item.Id })">Editar</a>
+                    <a class="btn btn-danger" href="@Url.Action("Deletar", "Usuario", new { id = item.Id })">Remover</a>
+                                        
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

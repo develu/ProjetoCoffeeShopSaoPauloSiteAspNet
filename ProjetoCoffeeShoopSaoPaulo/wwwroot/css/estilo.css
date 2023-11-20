@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #43190B;
+}
+
+header {
+    height: auto;
+    /*  border: 5px solid red;*/
+    background-color: #43190B;
+}
+
+.banner {
+
+    height: 100%;
+}
+
+.navbar-nav>li>a {
+    color: wheat;
+}
+
+.navbar-nav>li:hover>a,
+.navbar-nav>li.active>a {
+    color: #A07A65;
+}
+
+.nav-item>a {
+    font-size: 20px;
+
+}
+
+main {
+    height: auto;
+    background-color: #A07A65;
+    /*border: 5px solid blue;*/
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    text-align: center;
+    font-size: 42px;
+}
+
+p {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    text-align: center;
+    font-size: 30px;
+}
+
+footer {
+    background-color: #43190B;
+    /*position: fixed;*/
+    bottom: 0;
+    width: 100%;
+}
+
+footer li {
+    color: wheat;
+    text-align: justify;
+}
+
+footer h4 {
+    color: wheat;
+    font-family: 'Dancing Script', cursive;
+}
+
+.title-cursive {
+    color: wheat;
+    font-family: 'Dancing Script', cursive;
+}
+
+footer p {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    text-align: center;
+    font-size: 20px;
+    color: wheat;
+}
+
+.bi {
+    color: brown;
+}
+
+#carousel img {
+    width: 900px;
+    height: 600px;
+}
+
+.form-control {
+    background-color: bisque;
+}

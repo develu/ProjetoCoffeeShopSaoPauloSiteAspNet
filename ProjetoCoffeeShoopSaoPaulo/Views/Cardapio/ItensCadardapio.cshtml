@@ -1,0 +1,20 @@
+﻿@model IEnumerable<ProjetoCoffeeShoopSaoPaulo.Models.ItemCardapio.ItemCardapioModel>
+
+@{
+    ViewData["Title"] = "ItensCadardapio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="row">
+
+    <h1 class="text-center my-4">@TempData["nome_categoria"]</h1>
+
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-2 text-center">
+            <img class="img-fluid" src="@item.Foto" alt="@item.Nome - @item.Descricao" title="@item.Descricao" style="width:316px; height:474px; ">
+            <h4 class="text-center">@item.Nome</h4>
+        </div>
+    }
+
+</section>

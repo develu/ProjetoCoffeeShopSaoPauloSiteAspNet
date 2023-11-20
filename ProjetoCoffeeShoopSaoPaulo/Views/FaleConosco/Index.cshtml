@@ -1,0 +1,49 @@
+﻿@{ //Layout  = "_Layout";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+@{ ViewBag.Title = "Fale Conosco"; }
+
+<section class="row" style="margin-bottom: 30px;">
+    
+    <div class="col-lg-6 col-sm-12">
+        <div class="container">
+            <h1 class="display-4">Contato</h1>
+            <hr>
+            <form method="post" action="/faleconosco/recebercontato">
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input class="form-control" type="text" name="nome" value="@ViewBag.FaleConosco.Nome" id="nome" placeholder="Digite o seu nome">
+                    @Html.ValidationMessage("nome")
+                </div>
+
+                <div class="form-group ">
+                    <label for="email">E-mail</label>
+                    <input class="form-control" type="text" name="email" value="@ViewBag.FaleConosco.Email" id="email" placeholder="Digite o seu e-mail">
+
+                    @Html.ValidationMessage("email")
+                </div>
+                <div class="form-group ">
+                    <label for="assunto">Assunto</label>
+                    <input class="form-control" type="text" name="assunto" value="@ViewBag.FaleConosco.Assunto" id="assunto" placeholder="Digite o Assunto">
+                    @Html.ValidationMessage("assunto")
+                </div>
+
+                <div class="form-group">
+                    <label for="mensagem">Mensagem</label>
+                    <textarea class="form-control" name="mensagem" id="mensagem" rows="3">@ViewBag.FaleConosco.Mensagem</textarea>
+                    @Html.ValidationMessage("mensagem")
+                </div>
+
+                <button type="submit" class="btn btn-outline-dark my-4">Enviar</button>
+            </form>
+
+            @ViewBag.Mensagem
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-sm-12 p-3 text-center">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.82001565068!2d-46.63539982370539!3d-23.538975060772046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5857eeaa9f43%3A0x523d6a1fa220d11b!2sCafeteria%20S%C3%A3o%20Paulo!5e0!3m2!1spt-BR!2sbr!4v1689955789744!5m2!1spt-BR!2sbr"
+                width="700" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+</section>
